@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Theme Toggle</title>
+
+  <style>
+    /* Smooth transition */
+    * {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Default Light Theme */
+    body.light {
+      background: white;
+      color: black;
+    }
+
+    /* Dark Theme */
+    body.dark {
+      background: #1a1a1a;
+      color: white;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Light / Dark Mode Toggle</h2>
+  <button id="themeBtn">Toggle Theme</button>
+
+  <script>
+    // 1. Load saved theme (if any)
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme) {
+      document.body.className = savedTheme;
+    } else {
+      document.body.className = "light"; // default
+    }
+
+    // 2. Toggle theme when button is clicked
+    document.getElementById("themeBtn").onclick = function () {
+      document.body.classList.toggle("dark");
+      document.body.classList.toggle("light");
+
+      // 3. Save current theme
+      localStorage.setItem("theme", document.body.className);
+    };
+  </script>
+
+</body>
+</html>
