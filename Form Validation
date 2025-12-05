@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Beginner Form Validation</title>
+  <style>
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+    input {
+      display: block;
+      margin-bottom: 10px;
+      padding: 8px;
+      width: 250px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Form Validation (Beginner)</h2>
+
+<form id="myForm">
+  <label>Name:</label>
+  <input id="name" type="text">
+  <p id="nameError" class="error"></p>
+
+  <label>Email:</label>
+  <input id="email" type="text">
+  <p id="emailError" class="error"></p>
+
+  <label>Password:</label>
+  <input id="password" type="password">
+  <p id="passwordError" class="error"></p>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+document.getElementById("myForm").addEventListener("submit", function(e) {
+  let valid = true;
+
+  // --- NAME VALIDATION ---
+  const name = document.getElementById("name").value.trim();
+  const nameError = document.getElementById("nameError");
+
+  if (name === "") {
+    nameError.textContent = "Name cannot be empty";
+    valid = false;
+  } else if (!/^[A-Za-z ]+$/.test(name)) {
+    nameError.textContent = "Name can only contain letters";
+    valid = false;
+  } else {
+    nameError.textContent = "";
+  }
+
+  // --- EMAIL VALIDATION ---
+  const email = document.getElementById("email").value.trim();
+  const emailError = document.getElementById("emailError");
+
+  if (email === "") {
+    emailError.textContent = "Email cannot be empty";
+    valid = false;
+  } 
+  else if (!email.includes("@") || !email.includes(".")) {
+    emailError.textContent = "Email must include @ and a domain (.com, .net, etc.)";
+    valid = false;
+  } 
+  else {
+    emailError.textContent = "";
+  }
+
+  // --- PASSWORD VALIDATION ---
+  const password = document.getElementById("password").value;
+  const passwordError = document.getElementById("passwordError");
+
+  if (password.length < 8) {
+    passwordError.textContent = "Password must be at least 8 characters";
+    valid = false;
+  } else {
+    passwordError.textContent = "";
+  }
+
+  // --- PREVENT SUBMISSION IF ANY ERRORS ---
+  if (!valid) {
+    e.preventDefault(); // stop form
+  }
+});
+</script>
+
+</body>
+</html>
